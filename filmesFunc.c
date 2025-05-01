@@ -18,20 +18,35 @@ void cadastrarFilme(PListaFilmes *lista) {
     printf("Digite a duracao do filme em minutos: ");
     scanf("%d", &novoFilme->filme.duracaoMin);
 
-    if(*lista == NULL) {
-        novoFilme->proximo = *lista;
-        novoFilme->anterior = novoFilme->proximo;
+    if (*lista == NULL) {
+        novoFilme->proximo = NULL;
+        novoFilme->anterior = NULL;
         *lista = novoFilme;
     } else {
         PListaFilmes temp = *lista;
-        while (temp->proximo != NULL) {
-            temp = temp->proximo;
+    
+        if (novoFilme->filme.id < temp->filme.id) {
+            novoFilme->proximo = temp;
+            novoFilme->anterior = NULL;
+            temp->anterior = novoFilme;
+            *lista = novoFilme;
+        } else {
+            while (temp->proximo != NULL && temp->filme.id < novoFilme->filme.id) {
+                temp = temp->proximo;
+            }
+    
+            if (temp->proximo == NULL && temp->filme.id < novoFilme->filme.id) {
+                temp->proximo = novoFilme;
+                novoFilme->anterior = temp;
+                novoFilme->proximo = NULL;
+            } else {
+                novoFilme->proximo = temp;
+                novoFilme->anterior = temp->anterior;
+                temp->anterior->proximo = novoFilme;
+                temp->anterior = novoFilme;
+            }
         }
-        temp->proximo = novoFilme;
-        novoFilme->anterior = temp;
-        novoFilme->proximo = NULL;
-    }
-
+    }    
     printf("Filme cadastrado com sucesso! ID: %d\n", novoFilme->filme.id);
 }
 
