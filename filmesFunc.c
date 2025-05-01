@@ -24,7 +24,7 @@ void cadastrarFilme(PListaFilmes *lista) {
     printf("Filme cadastrado com sucesso! ID: %d\n", novoFilme->filme.id);
 }
 
-listaFilmes* buscarFilme(PListaFilmes lista, int id) {
+PListaFilmes buscarFilme(PListaFilmes lista, int id) {
     while (lista != NULL) {
         if (lista->filme.id == id) {
             return lista;

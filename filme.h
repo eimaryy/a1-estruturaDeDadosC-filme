@@ -15,4 +15,4 @@ typedef struct listaFilmes {
 
 void cadastrarFilme(PListaFilmes *lista);
 void mostrarFilmes(PListaFilmes lista);
-listaFilmes* buscarFilme(PListaFilmes lista, int id);
+PListaFilmes buscarFilme(PListaFilmes lista, int id);

@@ -1,6 +1,6 @@
 #include "filme.h"
 
-main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
     PListaFilmes lista = NULL;
     int opcao, id;
     
