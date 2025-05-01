@@ -12,3 +12,7 @@ typedef struct listaFilmes {
     Filme filme;
     struct listaFilmes *proximo;
 } ListaFilmes, *PListaFilmes;
+
+void cadastrarFilme(PListaFilmes *lista);
+void mostrarFilmes(PListaFilmes lista);
+listaFilmes* buscarFilme(PListaFilmes lista, int id);
