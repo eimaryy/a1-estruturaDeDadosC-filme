@@ -58,3 +58,10 @@ void mostrarFilmes(PListaFilmes lista) {
     printf("ID: %d, Nome: %s, Duracao: %d minutos\n", lista->filme.id, lista->filme.nomeFilme, lista->filme.duracaoMin);
     mostrarFilmes(lista->proximo);
 }
+
+PListaFilmes buscarFilme(PListaFilmes lista, int id) {
+    if (lista == NULL || lista->filme.id == id) {
+        return lista;
+    }
+    return buscarFilme(lista->proximo, id);
+}
