@@ -52,13 +52,9 @@ void cadastrarFilme(PListaFilmes *lista) {
 
 void mostrarFilmes(PListaFilmes lista) {
     if (lista == NULL) {
-        printf("Nenhum filme cadastrado.\n");
         return;
     }
 
-    printf("Lista de Filmes:\n");
-    while (lista != NULL) {
-        printf("ID: %d, Nome: %s, Duracao: %d minutos\n", lista->filme.id, lista->filme.nomeFilme, lista->filme.duracaoMin);
-        lista = lista->proximo;
-    }
+    printf("ID: %d, Nome: %s, Duracao: %d minutos\n", lista->filme.id, lista->filme.nomeFilme, lista->filme.duracaoMin);
+    mostrarFilmes(lista->proximo);
 }

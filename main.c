@@ -18,6 +18,11 @@ int main(int argc, char *argv[]){
                 cadastrarFilme(&lista);
                 break;
             case 2:
+                if (lista == NULL) {
+                    printf("Nenhum filme cadastrado.\n");
+                    break;
+                }
+                printf("Lista de Filmes:\n");
                 mostrarFilmes(lista);
                 break;
             case 3:
