@@ -18,20 +18,21 @@ void cadastrarFilme(PListaFilmes *lista) {
     printf("Digite a duracao do filme em minutos: ");
     scanf("%d", &novoFilme->filme.duracaoMin);
 
-    novoFilme->proximo = *lista;
-    *lista = novoFilme;
+    if(*lista == NULL) {
+        novoFilme->proximo = *lista;
+        novoFilme->anterior = novoFilme->proximo;
+        *lista = novoFilme;
+    } else {
+        PListaFilmes temp = *lista;
+        while (temp->proximo != NULL) {
+            temp = temp->proximo;
+        }
+        temp->proximo = novoFilme;
+        novoFilme->anterior = temp;
+        novoFilme->proximo = NULL;
+    }
 
     printf("Filme cadastrado com sucesso! ID: %d\n", novoFilme->filme.id);
-}
-
-PListaFilmes buscarFilme(PListaFilmes lista, int id) {
-    while (lista != NULL) {
-        if (lista->filme.id == id) {
-            return lista;
-        }
-        lista = lista->proximo;
-    }
-    return NULL;
 }
 
 void mostrarFilmes(PListaFilmes lista) {

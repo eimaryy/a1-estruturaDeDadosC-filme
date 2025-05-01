@@ -11,6 +11,7 @@ typedef struct filme {
 typedef struct listaFilmes {
     Filme filme;
     struct listaFilmes *proximo;
+    struct listaFilmes *anterior;
 } ListaFilmes, *PListaFilmes;
 
 void cadastrarFilme(PListaFilmes *lista);

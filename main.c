@@ -23,12 +23,12 @@ int main(int argc, char *argv[]){
             case 3:
                 printf("Digite o ID do filme a ser buscado: ");
                 scanf("%d", &id);
-                PListaFilmes filmeEncontrado = buscarFilme(lista, id);
-                if (filmeEncontrado != NULL) {
-                    printf("Filme encontrado: ID: %d, Nome: %s, Duracao: %d minutos\n", filmeEncontrado->filme.id, filmeEncontrado->filme.nomeFilme, filmeEncontrado->filme.duracaoMin);
-                } else {
-                    printf("Filme com ID %d nao encontrado.\n", id);
-                }
+                // PListaFilmes filmeEncontrado = buscarFilme(lista, id);
+                // if (filmeEncontrado != NULL) {
+                //     printf("Filme encontrado: ID: %d, Nome: %s, Duracao: %d minutos\n", filmeEncontrado->filme.id, filmeEncontrado->filme.nomeFilme, filmeEncontrado->filme.duracaoMin);
+                // } else {
+                //     printf("Filme com ID %d nao encontrado.\n", id);
+                // }
                 break;
             case 4:
                 printf("Saindo...\n");
