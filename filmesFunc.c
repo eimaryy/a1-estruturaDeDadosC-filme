@@ -31,10 +31,9 @@ void cadastrarFilme(PListaFilmes *lista) {
             temp->anterior = novoFilme;
             *lista = novoFilme;
         } else {
-            while (temp->proximo != NULL && temp->filme.id < novoFilme->filme.id) {
-                temp = temp->proximo;
+            if(temp->proximo != NULL && temp->filme.id < novoFilme->filme.id) {
+                cadastrarFilme(&temp->proximo);
             }
-    
             if (temp->proximo == NULL && temp->filme.id < novoFilme->filme.id) {
                 temp->proximo = novoFilme;
                 novoFilme->anterior = temp;
