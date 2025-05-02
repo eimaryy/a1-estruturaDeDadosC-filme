@@ -38,10 +38,10 @@ int main(int argc, char *argv[]){
                 break;
             }
             case 4:
-				printf("Digite o ID do filme a ser excluido: \n");
-				scanf("%d", &id);
-				excluirFilme(&lista, id);
-				break;    
+		printf("Digite o ID do filme a ser excluido: \n");
+		scanf("%d", &id);
+		excluirFilme(&lista, id);
+		break;    
                 
             case 5:
                 printf("Saindo...\n");
