@@ -64,3 +64,33 @@ PListaFilmes buscarFilme(PListaFilmes lista, int id) {
     }
     return buscarFilme(lista->proximo, id);
 }
+
+void excluirFilme(PListaFilmes *lista, int id) {
+    if (*lista == NULL) {
+        printf("Filme com ID %d nao encontrado.\n", id);
+        return;
+    }
+
+    if ((*lista)->filme.id == id) {
+        PListaFilmes temp = *lista;
+
+        if (temp->anterior != NULL) {
+            temp->anterior->proximo = temp->proximo;
+        }
+
+        if (temp->proximo != NULL) {
+            temp->proximo->anterior = temp->anterior;
+        }
+
+        if (temp->anterior == NULL) {
+            *lista = temp->proximo;
+        }
+
+        printf("Filme '%s' com ID %d excluído com sucesso.\n", temp->filme.nomeFilme, temp->filme.id);
+        free(temp);
+        return;
+    }
+
+    excluirFilme(&((*lista)->proximo), id);
+}
+
