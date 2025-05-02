@@ -17,3 +17,4 @@ typedef struct listaFilmes {
 void cadastrarFilme(PListaFilmes *lista);
 void mostrarFilmes(PListaFilmes lista);
 PListaFilmes buscarFilme(PListaFilmes lista, int id);
+void excluirFilme(PListaFilmes *lista, int id);
