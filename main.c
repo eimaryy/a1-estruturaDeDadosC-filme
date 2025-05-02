@@ -9,7 +9,8 @@ int main(int argc, char *argv[]){
         printf("1. Cadastrar Filme\n");
         printf("2. Mostrar Filmes\n");
         printf("3. Buscar Filme\n");
-        printf("4. Sair\n");
+        printf("4. Excluir Filme\n");
+        printf("5. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         
@@ -25,7 +26,7 @@ int main(int argc, char *argv[]){
                 printf("Lista de Filmes:\n");
                 mostrarFilmes(lista);
                 break;
-            case 3:
+            case 3: {
                 printf("Digite o ID do filme a ser buscado: ");
                 scanf("%d", &id);
                 PListaFilmes filmeEncontrado = buscarFilme(lista, id);
@@ -35,13 +36,20 @@ int main(int argc, char *argv[]){
                     printf("Filme com ID %d nao encontrado.\n", id);
                 }
                 break;
+            }
             case 4:
+				printf("Digite o ID do filme a ser excluido: \n");
+				scanf("%d", &id);
+				excluirFilme(&lista, id);
+				break;    
+                
+            case 5:
                 printf("Saindo...\n");
                 break;
             default:
                 printf("Opcao invalida! Tente novamente.\n");
         }
-    } while(opcao != 4);
+    } while(opcao != 5);
     
     return 0;
 
