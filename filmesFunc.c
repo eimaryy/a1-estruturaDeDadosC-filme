@@ -8,7 +8,7 @@ int gerarID() {
 void cadastrarFilme(PListaFilmes *lista) {
     PListaFilmes novoFilme = (PListaFilmes)malloc(sizeof(ListaFilmes));
     if (novoFilme == NULL) {
-        printf("Erro ao alocar memoria para o novo filme.\n");
+        printf("Erro ao alocar memória para o novo filme.\n");
         return;
     }
 
@@ -18,34 +18,34 @@ void cadastrarFilme(PListaFilmes *lista) {
     printf("Digite a duracao do filme em minutos: ");
     scanf("%d", &novoFilme->filme.duracaoMin);
 
+    novoFilme->proximo = NULL;
+    novoFilme->anterior = NULL;
+
     if (*lista == NULL) {
-        novoFilme->proximo = NULL;
-        novoFilme->anterior = NULL;
         *lista = novoFilme;
     } else {
-        PListaFilmes temp = *lista;
-    
-        if (novoFilme->filme.id < temp->filme.id) {
-            novoFilme->proximo = temp;
-            novoFilme->anterior = NULL;
-            temp->anterior = novoFilme;
+        PListaFilmes atual = *lista;
+
+        if (novoFilme->filme.id < atual->filme.id) {
+            novoFilme->proximo = atual;
+            atual->anterior = novoFilme;
             *lista = novoFilme;
         } else {
-            if(temp->proximo != NULL && temp->filme.id < novoFilme->filme.id) {
-                cadastrarFilme(&temp->proximo);
+            while (atual->proximo != NULL && atual->proximo->filme.id < novoFilme->filme.id) {
+                atual = atual->proximo;
             }
-            if (temp->proximo == NULL && temp->filme.id < novoFilme->filme.id) {
-                temp->proximo = novoFilme;
-                novoFilme->anterior = temp;
-                novoFilme->proximo = NULL;
-            } else {
-                novoFilme->proximo = temp;
-                novoFilme->anterior = temp->anterior;
-                temp->anterior->proximo = novoFilme;
-                temp->anterior = novoFilme;
+
+            novoFilme->proximo = atual->proximo;
+            novoFilme->anterior = atual;
+
+            if (atual->proximo != NULL) {
+                atual->proximo->anterior = novoFilme;
             }
+
+            atual->proximo = novoFilme;
         }
-    }    
+    }
+
     printf("Filme cadastrado com sucesso! ID: %d\n", novoFilme->filme.id);
 }
 
