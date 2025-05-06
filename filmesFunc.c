@@ -86,7 +86,7 @@ void excluirFilme(PListaFilmes *lista, int id) {
             *lista = temp->proximo;
         }
 
-        printf("Filme '%s' com ID %d excluído com sucesso.\n", temp->filme.nomeFilme, temp->filme.id);
+        printf("Filme '%s' com ID %d excluido com sucesso.\n", temp->filme.nomeFilme, temp->filme.id);
         free(temp);
         return;
     }
