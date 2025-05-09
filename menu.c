@@ -2,6 +2,14 @@
 #include "menu.h"
 #include <locale.h>
 
+void limparTela(){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 void menu(){
     PListaFilmes lista = NULL;
     int opcao, id, verifica;
@@ -24,9 +32,15 @@ void menu(){
        
         switch(opcao) {
             case 1:
+<<<<<<< HEAD
                 cadastrar_filme(&lista);
+=======
+                limparTela();
+                cadastrarFilme(&lista);
+>>>>>>> 5d93e6cc1dd60fb4b7024f4fe25c2a9ca1cae128
                 break;
             case 2:
+                limparTela();
                 if (lista == NULL) {
                     printf("Nenhum filme cadastrado.\n");
                 break;
@@ -35,6 +49,7 @@ void menu(){
                 mostrarFilmes(lista);
                 break;
             case 3: {
+                limparTela();
                 printf("Digite o ID do filme a ser buscado: ");
                 scanf("%d", &id);
                 PListaFilmes filmeEncontrado = buscarFilme(lista, id);
@@ -46,11 +61,13 @@ void menu(){
                 break;
             }
             case 4:
+                limparTela();
 		        printf("Digite o ID do filme a ser excluido: \n");
 		        scanf("%d", &id);
 		        excluirFilme(&lista, id);
 		        break;                   
             case 5:
+                limparTela();
                 printf("Saindo...\n");
                 break;
             default:
