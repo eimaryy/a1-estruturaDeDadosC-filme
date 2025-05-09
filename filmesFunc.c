@@ -1,53 +1,62 @@
 #include "filme.h"
 
+
 int gerarID() {
-    static int idAtual = 0;
-    return ++idAtual;
+     int idAtual = rand();
+    return idAtual;
 }
 
-void cadastrarFilme(PListaFilmes *lista) {
-    PListaFilmes novoFilme = (PListaFilmes)malloc(sizeof(ListaFilmes));
-    if (novoFilme == NULL) {
-        printf("Erro ao alocar memÃ³ria para o novo filme.\n");
-        return;
-    }
 
-    novoFilme->filme.id = gerarID();
-    printf("Digite o nome do filme: ");
-    scanf(" %[^\n]", novoFilme->filme.nomeFilme);
-    printf("Digite a duracao do filme em minutos: ");
-    scanf("%d", &novoFilme->filme.duracaoMin);
-
-    novoFilme->proximo = NULL;
+PListaFilmes cria_no(Filme filme){
+	PListaFilmes novoFilme = (PListaFilmes)malloc(sizeof(ListaFilmes));
+	novoFilme->filme = filme;
+	novoFilme->proximo = NULL;
     novoFilme->anterior = NULL;
-
-    if (*lista == NULL) {
-        *lista = novoFilme;
-    } else {
-        PListaFilmes atual = *lista;
-
-        if (novoFilme->filme.id < atual->filme.id) {
-            novoFilme->proximo = atual;
-            atual->anterior = novoFilme;
-            *lista = novoFilme;
-        } else {
-            while (atual->proximo != NULL && atual->proximo->filme.id < novoFilme->filme.id) {
-                atual = atual->proximo;
-            }
-
-            novoFilme->proximo = atual->proximo;
-            novoFilme->anterior = atual;
-
-            if (atual->proximo != NULL) {
-                atual->proximo->anterior = novoFilme;
-            }
-
-            atual->proximo = novoFilme;
-        }
-    }
-
-    printf("Filme cadastrado com sucesso! ID: %d\n", novoFilme->filme.id);
+    return novoFilme;
 }
+
+
+
+PListaFilmes inserir_ordenado(PListaFilmes *lista, Filme novoFilme) {
+	PListaFilmes novo = cria_no(novoFilme);
+    if (*lista == NULL) {
+    	*lista = novo;
+		 return novo;
+        
+    } 
+	else {
+        PListaFilmes temp = *lista;
+
+        if (novo->filme.id < temp->filme.id) {
+            novo->proximo = temp;
+            temp->anterior = novo;
+            return novo;
+        } 
+        
+        temp->proximo = inserir_ordenado(&temp->proximo, novoFilme);
+		
+		if(temp->proximo != NULL){
+			temp->proximo->anterior = temp;
+		}
+		
+		return *lista;
+		}
+    }
+    
+    void cadastrar_filme(PListaFilmes *lista) {
+    Filme f;
+    f.id = gerarID();
+    printf("Digite o nome do filme: ");
+    scanf(" %[^\n]", f.nomeFilme);
+    printf("Digite a duração em minutos: ");
+    scanf("%d", &f.duracaoMin);
+
+    inserir_ordenado(lista, f);
+    printf("Filme cadastrado com sucesso! ID: %d\n", f.id);
+}
+
+
+
 
 void mostrarFilmes(PListaFilmes lista) {
     if (lista == NULL) {
@@ -86,11 +95,12 @@ void excluirFilme(PListaFilmes *lista, int id) {
             *lista = temp->proximo;
         }
 
-        printf("Filme '%s' com ID %d excluÃ­do com sucesso.\n", temp->filme.nomeFilme, temp->filme.id);
+        printf("Filme '%s' com ID %d excluído com sucesso.\n", temp->filme.nomeFilme, temp->filme.id);
         free(temp);
         return;
     }
 
     excluirFilme(&((*lista)->proximo), id);
 }
+
 

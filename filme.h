@@ -14,7 +14,10 @@ typedef struct listaFilmes {
     struct listaFilmes *anterior;
 } ListaFilmes, *PListaFilmes;
 
-void cadastrarFilme(PListaFilmes *lista);
+PListaFilmes cria_no(Filme filme);
 void mostrarFilmes(PListaFilmes lista);
 PListaFilmes buscarFilme(PListaFilmes lista, int id);
 void excluirFilme(PListaFilmes *lista, int id);
+PListaFilmes inserir_ordenado(PListaFilmes *lista, Filme novoFilme);
+ void cadastrar_filme(PListaFilmes *lista);
+

@@ -1,8 +1,11 @@
+#include <stdio.h>
 #include "menu.h"
+#include <locale.h>
 
 void menu(){
     PListaFilmes lista = NULL;
-    int opcao, id;
+    int opcao, id, verifica;
+    setlocale(LC_ALL, "portuguese");
     
     do {
         printf("Menu:\n");
@@ -12,11 +15,16 @@ void menu(){
         printf("4. Excluir Filme\n");
         printf("5. Sair\n");
         printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
         
+       verifica = scanf("%d", &opcao);
+       
+       if(verifica != 1){
+       	while(getchar() != '\n');
+	   }
+       
         switch(opcao) {
             case 1:
-                cadastrarFilme(&lista);
+                cadastrar_filme(&lista);
                 break;
             case 2:
                 if (lista == NULL) {
