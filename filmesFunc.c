@@ -2,8 +2,8 @@
 
 
 int gerarID() {
-     int idAtual = rand();
-    return idAtual;
+    static int idAtual = 0;
+    return ++idAtual;
 }
 
 
@@ -21,10 +21,8 @@ PListaFilmes inserir_ordenado(PListaFilmes *lista, Filme novoFilme) {
 	PListaFilmes novo = cria_no(novoFilme);
     if (*lista == NULL) {
     	*lista = novo;
-		 return novo;
-        
-    } 
-	else {
+		return novo;
+    } else {
         PListaFilmes temp = *lista;
 
         if (novo->filme.id < temp->filme.id) {
@@ -36,18 +34,20 @@ PListaFilmes inserir_ordenado(PListaFilmes *lista, Filme novoFilme) {
         temp->proximo = inserir_ordenado(&temp->proximo, novoFilme);
 		
 		if(temp->proximo != NULL){
-			temp->proximo->anterior = temp;
+		   temp->proximo->anterior = temp;
 		}
 		
 		return *lista;
-		}
-    }
+	}
+}
     
     void cadastrar_filme(PListaFilmes *lista) {
     Filme f;
     f.id = gerarID();
+    
     printf("Digite o nome do filme: ");
     scanf(" %[^\n]", f.nomeFilme);
+    
     printf("Digite a duração em minutos: ");
     scanf("%d", &f.duracaoMin);
 
@@ -62,7 +62,7 @@ void mostrarFilmes(PListaFilmes lista) {
     if (lista == NULL) {
         return;
     }
-
+	
     printf("ID: %d, Nome: %s, Duracao: %d minutos\n", lista->filme.id, lista->filme.nomeFilme, lista->filme.duracaoMin);
     mostrarFilmes(lista->proximo);
 }
@@ -71,6 +71,7 @@ PListaFilmes buscarFilme(PListaFilmes lista, int id) {
     if (lista == NULL || lista->filme.id == id) {
         return lista;
     }
+    
     return buscarFilme(lista->proximo, id);
 }
 
@@ -102,5 +103,36 @@ void excluirFilme(PListaFilmes *lista, int id) {
 
     excluirFilme(&((*lista)->proximo), id);
 }
+    
+    
+    
+PListaFilmes alterar_filme(PListaFilmes lista, int id){
+
+	if(lista == NULL){
+	printf("ID não encontrado.\n");
+		return NULL;
+	}
+	
+	else if(id == lista->filme.id){
+		
+		printf("Digite o nome do novo filme: ");
+		scanf(" %[^\n]", lista->filme.nomeFilme);
+		while (getchar() != '\n');
+		
+		printf("Digite a duração do novo filme: ");
+		scanf("%d", &lista->filme.duracaoMin);
+		printf("Filme alterado com sucesso.\n");
+		return lista;
+	}
+	
+		
+	lista->proximo = alterar_filme(lista->proximo, id);
+		return lista;
+}
+
+    
+    
+    
+
 
 
