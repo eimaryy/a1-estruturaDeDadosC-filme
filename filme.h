@@ -20,4 +20,5 @@ PListaFilmes buscarFilme(PListaFilmes lista, int id);
 void excluirFilme(PListaFilmes *lista, int id);
 PListaFilmes inserir_ordenado(PListaFilmes *lista, Filme novoFilme);
  void cadastrar_filme(PListaFilmes *lista);
+PListaFilmes alterar_filme(PListaFilmes lista, int id);
 

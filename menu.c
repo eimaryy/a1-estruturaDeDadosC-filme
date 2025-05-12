@@ -1,7 +1,4 @@
-#include <stdio.h>
 #include "menu.h"
-#include <stdlib.h>
-#include <locale.h>
 
 void menu(){
     PListaFilmes lista = NULL;
